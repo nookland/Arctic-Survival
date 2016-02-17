@@ -1,0 +1,46 @@
+//This is still a work in progress
+//Last date edited: Wednesday February 17th, 2016
+
+using UnityEngine;
+using System.Collections;
+
+public class PlayerMovementScript : MonoBehaviour 
+{
+	public float moveSpeed;
+	public static bool isJumping;
+
+	// Use this for initialization
+	void Start () 
+	{
+	
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		moveCharacter ();
+	}
+
+	void moveCharacter (bool userInput)
+	{
+		Vector2 playerMove = (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))); //gets the values of the horizontal and vertical values
+		print (playerMove);   
+		transform.Translate(playerMove * moveSpeed);  //moves player based on playermove values and moves player at a rate of that scaled by movespeed
+	}
+
+	void OnCollisionEnter2D(Collider2D other)
+	{
+		if (other.gameObject.name == "jumpHole")  //if player walks into a jumpable object
+		{
+			//play animation for jump
+			print("jump used");
+		}
+
+		if (other.gameObject.name == "fallHole") 
+		{
+			//play animation for falling
+			//apply damage
+			print("player fell");
+		}
+	}
+}
